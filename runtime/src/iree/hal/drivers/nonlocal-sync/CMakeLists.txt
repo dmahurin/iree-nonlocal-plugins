@@ -11,6 +11,8 @@
 iree_add_all_subdirs()
 
 iree_cc_library(
+  PACKAGE
+    drivers::nonlocal_sync
   NAME
     sync_driver
   HDRS
@@ -36,6 +38,9 @@ iree_cc_library(
     iree::hal::utils::file_transfer
     iree::hal::utils::memory_file
     iree::hal::utils::semaphore_base
+  INCLUDES
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../nonlocal"
   PUBLIC
 )
 

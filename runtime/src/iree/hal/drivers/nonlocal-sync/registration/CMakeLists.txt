@@ -11,6 +11,8 @@
 iree_add_all_subdirs()
 
 iree_cc_library(
+  PACKAGE
+    drivers::nonlocal_sync::registration
   NAME
     registration
   HDRS
