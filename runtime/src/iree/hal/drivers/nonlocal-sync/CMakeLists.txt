@@ -14,7 +14,7 @@ iree_cc_library(
   PACKAGE
     drivers::nonlocal_sync
   NAME
-    sync_driver
+    nonlocal-sync
   HDRS
     "device.h"
     "driver.h"
