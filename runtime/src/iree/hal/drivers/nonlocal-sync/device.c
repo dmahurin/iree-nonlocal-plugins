@@ -18,7 +18,7 @@
 #include "semaphore.h"
 #include "iree/hal/local/executable_environment.h"
 #include "iree/hal/local/inline_command_buffer.h"
-#include "iree/hal/local/local_executable_cache.h"
+#include "executable_cache.h"
 #include "iree/hal/utils/deferred_command_buffer.h"
 #include "iree/hal/utils/file_transfer.h"
 #include "iree/hal/utils/memory_file.h"
@@ -266,7 +266,7 @@ static iree_status_t iree_hal_nl_sync_device_create_executable_cache(
     iree_hal_device_t* base_device, iree_string_view_t identifier,
     iree_loop_t loop, iree_hal_executable_cache_t** out_executable_cache) {
   iree_hal_nl_sync_device_t* device = iree_hal_nl_sync_device_cast(base_device);
-  return iree_hal_local_executable_cache_create(
+  return iree_hal_nonlocal_executable_cache_create(
       identifier, /*worker_capacity=*/1, device->loader_count, device->loaders,
       iree_hal_device_host_allocator(base_device), out_executable_cache);
 }

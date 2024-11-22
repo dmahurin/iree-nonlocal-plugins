@@ -22,6 +22,7 @@ iree_cc_library(
     "semaphore.h"
     "../../nonlocal/buffer.h"
     "../../nonlocal/allocator.h"
+    "../../nonlocal/executable_cache.h"
     "../../nonlocal/nl_api.h"
   SRCS
     "device.c"
@@ -30,6 +31,7 @@ iree_cc_library(
     "semaphore.c"
     "../../nonlocal/buffer.c"
     "../../nonlocal/allocator.c"
+    "../../nonlocal/executable_cache.c"
     "../../nonlocal/nl_api.c"
   DEPS
     iree::base
