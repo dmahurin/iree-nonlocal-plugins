@@ -23,7 +23,7 @@ extern "C" {
 // one device is the same JIT'ed executable in another, and in multi-tenant
 // situations we're likely to want that isolation _and_ sharing.
 
-iree_status_t iree_hal_local_executable_cache_create(
+iree_status_t iree_hal_nonlocal_executable_cache_create(
     iree_string_view_t identifier, iree_host_size_t worker_capacity,
     iree_host_size_t loader_count, iree_hal_executable_loader_t** loaders,
     iree_allocator_t host_allocator,
