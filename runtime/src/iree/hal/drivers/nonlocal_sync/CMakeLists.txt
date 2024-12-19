@@ -10,6 +10,8 @@
 
 iree_add_all_subdirs()
 
+option(NL_DEBUG "NL Client/server debug level" 0)
+
 option(NL_USE_SERVER "Use NL execution server" OFF)
 
 if(NL_USE_SERVER)
@@ -47,6 +49,8 @@ iree_cc_library(
     "../../nonlocal/embedded_elf_loader.c"
     "../../nonlocal/command_data.c"
     "${NL_API_CLIENT}"
+  DEFINES
+    "-DDEBUG=${NL_DEBUG}"
   DEPS
     iree::base
     iree::base::internal
@@ -76,6 +80,8 @@ iree_cc_binary(
     "../../nonlocal/command_data.c"
     "../../nonlocal/nl_api.c"
     "../../nonlocal/elf_module_server.c"
+  DEFINES
+    "-DDEBUG=${NL_DEBUG}"
   DEPS
     iree::hal::local::elf::elf_module
     iree::base
