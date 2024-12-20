@@ -10,6 +10,14 @@
 
 iree_add_all_subdirs()
 
+option(NL_USE_SERVER "Use NL execution server" OFF)
+
+if(NL_USE_SERVER)
+set(NL_API_CLIENT "../../nonlocal/nl_api_client.c")
+else()
+set(NL_API_CLIENT "../../nonlocal/nl_api.c")
+endif()
+
 iree_cc_library(
   PACKAGE
     drivers::nonlocal_sync
@@ -27,6 +35,7 @@ iree_cc_library(
     "../../nonlocal/local_executable.h"
     "../../nonlocal/embedded_elf_loader.h"
     "../../nonlocal/nl_api.h"
+    "../../nonlocal/command_data.h"
   SRCS
     "device.c"
     "driver.c"
@@ -38,7 +47,8 @@ iree_cc_library(
     "../../nonlocal/inline_command_buffer.c"
     "../../nonlocal/local_executable.c"
     "../../nonlocal/embedded_elf_loader.c"
-    "../../nonlocal/nl_api.c"
+    "../../nonlocal/command_data.c"
+    "${NL_API_CLIENT}"
   DEPS
     iree::base
     iree::base::internal
