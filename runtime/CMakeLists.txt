@@ -21,3 +21,14 @@ iree_register_external_hal_driver(
     iree_hal_nonlocal_sync_driver_module_register
 )
 
+iree_register_external_hal_driver(
+  NAME
+    nonlocal-task
+  SOURCE_DIR
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/iree/hal/drivers/nonlocal_task"
+  DRIVER_TARGET
+    drivers::nonlocal_task::registration
+  REGISTER_FN
+    iree_hal_nonlocal_task_driver_module_register
+)
+

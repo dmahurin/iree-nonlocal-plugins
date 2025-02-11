@@ -11,8 +11,10 @@
 iree_add_all_subdirs()
 
 iree_cc_library(
+  PACKAGE
+    drivers::nonlocal_task
   NAME
-    task_driver
+    nonlocal_task
   HDRS
     "command_buffer.h"
     "device.h"
