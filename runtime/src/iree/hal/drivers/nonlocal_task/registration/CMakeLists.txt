@@ -11,6 +11,8 @@
 iree_add_all_subdirs()
 
 iree_cc_library(
+  PACKAGE
+    drivers::nonlocal_task::registration
   NAME
     registration
   HDRS
@@ -21,12 +23,12 @@ iree_cc_library(
     iree::base
     iree::base::internal::flags
     iree::hal
-    iree::hal::drivers::local_task::task_driver
+    drivers::nonlocal_task
     iree::hal::local::loaders::registration
     iree::hal::local::plugins::registration
     iree::task::api
   DEFINES
-    "IREE_HAVE_HAL_LOCAL_TASK_DRIVER_MODULE=1"
+    "IREE_HAVE_HAL_NONLOCAL_TASK_DEVICE_DRIVER_MODULE=1"
   PUBLIC
 )
 
