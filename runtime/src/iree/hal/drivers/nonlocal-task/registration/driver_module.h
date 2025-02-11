@@ -14,7 +14,7 @@
 extern "C" {
 #endif  // __cplusplus
 
-IREE_API_EXPORT iree_status_t iree_hal_local_task_driver_module_register(
+IREE_API_EXPORT iree_status_t iree_hal_nl_task_driver_module_register(
     iree_hal_driver_registry_t* registry);
 
 #ifdef __cplusplus

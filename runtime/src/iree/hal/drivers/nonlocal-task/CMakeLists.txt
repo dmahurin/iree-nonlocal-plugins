@@ -11,24 +11,26 @@
 iree_add_all_subdirs()
 
 iree_cc_library(
+  PACKAGE
+    drivers::nonlocal_task
   NAME
-    task_driver
+    nonlocal-task
   HDRS
-    "task_command_buffer.h"
-    "task_device.h"
-    "task_driver.h"
-    "task_event.h"
-    "task_queue.h"
-    "task_queue_state.h"
-    "task_semaphore.h"
+    "command_buffer.h"
+    "device.h"
+    "driver.h"
+    "event.h"
+    "queue.h"
+    "queue_state.h"
+    "semaphore.h"
   SRCS
-    "task_command_buffer.c"
-    "task_device.c"
-    "task_driver.c"
-    "task_event.c"
-    "task_queue.c"
-    "task_queue_state.c"
-    "task_semaphore.c"
+    "command_buffer.c"
+    "device.c"
+    "driver.c"
+    "event.c"
+    "queue.c"
+    "queue_state.c"
+    "semaphore.c"
   DEPS
     iree::base
     iree::base::internal
@@ -47,6 +49,9 @@ iree_cc_library(
     iree::hal::utils::resource_set
     iree::hal::utils::semaphore_base
     iree::task
+  INCLUDES
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../nonlocal"
   PUBLIC
 )
 
