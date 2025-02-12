@@ -6,6 +6,8 @@
 
 #include "device.h"
 
+#include "allocator.h"
+
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
@@ -17,7 +19,7 @@
 #include "queue.h"
 #include "semaphore.h"
 #include "iree/hal/local/executable_environment.h"
-#include "iree/hal/local/local_executable_cache.h"
+#include "executable_cache.h"
 #include "iree/hal/utils/deferred_command_buffer.h"
 #include "iree/hal/utils/file_transfer.h"
 #include "iree/hal/utils/memory_file.h"
@@ -111,10 +113,10 @@ iree_status_t iree_hal_nl_task_device_create(
     iree_string_view_append_to_buffer(identifier, &device->identifier,
                                       (char*)device + struct_size);
     device->host_allocator = host_allocator;
-    iree_hal_allocator_t* device_allocator = NULL;
-    status = iree_hal_allocator_create_heap(iree_make_cstring_view("local"),
-                                          host_allocator, host_allocator,
-                                          &device_allocator);
+    iree_hal_allocator_t *device_allocator = NULL;
+    iree_hal_nl_allocator_create(
+        host_allocator, &device_allocator);
+
     device->device_allocator = device_allocator;
     iree_hal_allocator_retain(device_allocator);
 
@@ -341,7 +343,7 @@ static iree_status_t iree_hal_nl_task_device_create_executable_cache(
         iree_task_executor_worker_count(device->queues[i].executor);
   }
 
-  return iree_hal_local_executable_cache_create(
+  return iree_hal_nonlocal_executable_cache_create(
       identifier, total_worker_count, device->loader_count, device->loaders,
       iree_hal_device_host_allocator(base_device), out_executable_cache);
 }

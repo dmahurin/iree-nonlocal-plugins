@@ -10,6 +10,15 @@
 
 iree_add_all_subdirs()
 
+option(NL_USE_SERVER "Use NL execution server" OFF)
+option(NL_DEBUG "NL Client/server debug level" 0)
+
+if(NL_USE_SERVER)
+set(NL_API_CLIENT "../../nonlocal/nl_api_client.c")
+else()
+set(NL_API_CLIENT "../../nonlocal/nl_api.c")
+endif()
+
 iree_cc_library(
   PACKAGE
     drivers::nonlocal_task
@@ -23,6 +32,13 @@ iree_cc_library(
     "queue.h"
     "queue_state.h"
     "semaphore.h"
+    "../../nonlocal/buffer.h"
+    "../../nonlocal/allocator.h"
+    "../../nonlocal/executable_cache.h"
+    "../../nonlocal/local_executable.h"
+    "../../nonlocal/embedded_elf_loader.h"
+    "../../nonlocal/command_data.h"
+    "../../nonlocal/nl_api.h"
   SRCS
     "command_buffer.c"
     "device.c"
@@ -31,6 +47,13 @@ iree_cc_library(
     "queue.c"
     "queue_state.c"
     "semaphore.c"
+    "../../nonlocal/buffer.c"
+    "../../nonlocal/allocator.c"
+    "../../nonlocal/executable_cache.c"
+    "../../nonlocal/local_executable.c"
+    "../../nonlocal/embedded_elf_loader.c"
+    "../../nonlocal/command_data.c"
+    "${NL_API_CLIENT}"
   DEPS
     iree::base
     iree::base::internal
