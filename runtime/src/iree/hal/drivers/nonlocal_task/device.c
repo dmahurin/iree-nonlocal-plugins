@@ -6,6 +6,8 @@
 
 #include "device.h"
 
+#include "allocator.h"
+
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
@@ -111,10 +113,10 @@ iree_status_t iree_hal_nl_task_device_create(
     iree_string_view_append_to_buffer(identifier, &device->identifier,
                                       (char*)device + struct_size);
     device->host_allocator = host_allocator;
-    iree_hal_allocator_t* device_allocator = NULL;
-    status = iree_hal_allocator_create_heap(iree_make_cstring_view("local"),
-                                          host_allocator, host_allocator,
-                                          &device_allocator);
+    iree_hal_allocator_t *device_allocator = NULL;
+    iree_hal_nl_allocator_create(
+        host_allocator, &device_allocator);
+
     device->device_allocator = device_allocator;
     iree_hal_allocator_retain(device_allocator);
 

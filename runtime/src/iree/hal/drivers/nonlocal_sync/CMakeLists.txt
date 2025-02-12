@@ -10,9 +10,8 @@
 
 iree_add_all_subdirs()
 
-option(NL_DEBUG "NL Client/server debug level" 0)
-
 option(NL_USE_SERVER "Use NL execution server" OFF)
+option(NL_DEBUG "NL Client/server debug level" 0)
 
 if(NL_USE_SERVER)
 set(NL_API_CLIENT "../../nonlocal/nl_api_client.c")
