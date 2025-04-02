@@ -61,7 +61,6 @@ iree_cc_library(
     iree::hal::local::executable_environment
     iree::hal::utils::deferred_command_buffer
     iree::hal::utils::file_transfer
-    iree::hal::utils::memory_file
     iree::hal::utils::semaphore_base
   INCLUDES
     "${CMAKE_CURRENT_SOURCE_DIR}"
